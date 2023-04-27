@@ -9,9 +9,9 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 </ul>
-                <form class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Búsqueda" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Buscar</button>
+                <form class="d-flex" role="search" @submit.prevent="buscarNota">
+                    <input class="form-control me-2" type="search" placeholder="Búsqueda" aria-label="Buscar" v-model="filtro">
+                    <button class="btn btn-outline-success">Buscar</button>
                 </form>
             </div>
         </div>
@@ -20,6 +20,15 @@
 
 <script>
 export default {
-
+    data() {
+        return {
+            filtro : ''
+        }
+    },
+    methods: {
+        buscarNota(){
+            this.$emit('buscarNota', this.filtro)
+        }
+    },
 }
 </script>

@@ -9,7 +9,8 @@ export default {
   data() {
     return {
       temperatura: '0',
-      notas : JSON.parse(localStorage.getItem('notas'))
+      notas : JSON.parse(localStorage.getItem('notas')),
+      filtro : ''
     }
   },
   computed: {
@@ -54,6 +55,9 @@ export default {
     },
     actualizarNotas(){
       this.notas = JSON.parse(localStorage.getItem('notas'));
+    },
+    buscar(filtro){
+      this.filtro = filtro;
     }
   },
 }
@@ -62,7 +66,7 @@ export default {
 <template>
   <div>
     <header>
-      <Navbar />
+      <Navbar @buscarNota="buscar"/>
     </header>
     <main class="principal">
       <article>
@@ -82,7 +86,7 @@ export default {
       </article>
       <article class="notas" v-if="notas">
         <template v-for="nota, index in notas" :key="index">
-          <note-card :nota="nota" @colorCambiado="actualizarNotas" @notaEliminada="actualizarNotas"/>
+          <note-card v-if="filtro == '' || nota.titulo.includes(filtro) || nota.descripcion.includes(filtro)" :nota="nota" @colorCambiado="actualizarNotas" @notaEliminada="actualizarNotas"/>
         </template>
       </article>
     </main>
