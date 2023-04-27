@@ -82,7 +82,7 @@ export default {
       </article>
       <article class="notas" v-if="notas">
         <template v-for="nota, index in notas" :key="index">
-          <note-card :nota="nota" @colorCambiado="actualizarNotas"/>
+          <note-card :nota="nota" @colorCambiado="actualizarNotas" @notaEliminada="actualizarNotas"/>
         </template>
       </article>
     </main>

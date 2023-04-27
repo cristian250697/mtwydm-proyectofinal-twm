@@ -15,6 +15,15 @@ export default {
             
             localStorage.setItem('notas', JSON.stringify(notasLS));
             this.$emit('colorCambiado');
+        },
+        eliminarTarjeta(){
+            let notasLS = JSON.parse(localStorage.getItem('notas'));
+            let indiceArreglo = notasLS.findIndex(nota => nota.titulo == this.nota.titulo && nota.descripcion == this.nota.descripcion)
+
+            notasLS.splice( indiceArreglo, 1 );
+
+            localStorage.setItem('notas', JSON.stringify(notasLS));
+            this.$emit('notaEliminada');
         }
     },
     computed : {
@@ -46,6 +55,6 @@ export default {
             <li @click="actualizarColor('rojo')"><a class="dropdown-item" href="#">Rojo</a></li>
             <li @click="actualizarColor('amarillo')"><a class="dropdown-item" href="#">Amarillo</a></li>
         </ul>
-        <button class="btn btn-danger btn-sm" type="button">Eliminar nota</button>
+        <button class="btn btn-danger btn-sm" type="button" @click="eliminarTarjeta">Eliminar nota</button>
     </section>
 </template>
