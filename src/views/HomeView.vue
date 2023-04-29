@@ -25,7 +25,7 @@ export default {
     NoteCard
   },
   async mounted() {
-    // this.temperatura = await this.obtenerTemperatura();
+    this.temperatura = await this.obtenerTemperatura();
   },
   methods: {
     obtenerTemperatura() {
